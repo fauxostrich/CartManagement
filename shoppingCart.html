@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2> Shopping Cart Checkout</h2>
+    <form>
+    <table id = "shoppingCart" class ="table">
+        <thead> 
+            <tr>
+                <th>Item Name</th>
+                <th>Price</th>
+            </tr>
+        </thead> 
+        <tbody>
+            
+        </tbody>
+        <tr>
+            <th>Total</th>
+            <th id = "total"></th>
+        </tr>
+        
+    </table>
+    <style>
+        table,th,td
+        {
+            border: solid blue 2px;
+        }
+        table{
+            border-collapse: collapse;
+            width: 20%;
+        }
+        th{
+            background-color: skyblue;
+        }
+        tbody tr:nth-child(even){
+            background-color: lightblue;
+        }
+    </style>
+    <script>
+        var obj = localStorage.getItem("key");
+        var obj = JSON.parse(localStorage.getItem("key"));
+        
+        console.log(obj);
+        var total = 0;
+        console.log(obj.length);
+        for(var i = 0; i < obj.length; i++)
+        {        
+            var table = document.getElementById("shoppingCart");
+            var body = table.getElementsByTagName("tbody")[0];
+            var newRow = body.insertRow(body.length);
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            
+            cell1.innerHTML = obj[i].name;
+            cell2.innerHTML ="$" + obj[i].price;
+            total += obj[i].price;
+        }
+    
+        var table = document.getElementById("shoppingCart");
+        var th = table.getElementsByTagName("th")[2];
+        var newRow = table.insertRow(th.length);
+        var totalCell = newRow.insertCell(0);
+        totalCell.innerHTML = "$" + total;
+        //localStorage.clear();
+    </script>
+</body>
+</html>
